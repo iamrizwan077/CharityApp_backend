@@ -9,3 +9,4 @@ def hello(request):
     print(request.data)
     name = request.POST['name']
     return Response(f"Hello {name}. Welcome to our first Flutter app.. ")
+
