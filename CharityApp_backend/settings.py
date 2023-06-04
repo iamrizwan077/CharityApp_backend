@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-svbn+gnb2+^v7e-9c4mc6u9fu-8e8dxwp2!)su+6s9igg595^!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = ['192.168.43.121', '0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -66,7 +66,11 @@ MIDDLEWARE = [
 SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_REQUIRED = True
 REST_AUTH = {
     # 'PASSWORD_RESET_SERIALIZER': 'picspace.views.MyPasswordResetSerializer',
     # 'OLD_PASSWORD_FIELD_ENABLED': True,
@@ -74,9 +78,15 @@ REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'CharityApp.serializers.CustomUserDetailsSerializer'
 }
 
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 ACCOUNT_ADAPTER = 'CharityApp.adapter.CustomAccountAdapter'
 AUTH_USER_MODEL = 'CharityApp.CustomUser'
-
+CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -121,12 +131,20 @@ WSGI_APPLICATION = 'CharityApp_backend.wsgi.application'
 
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'fcwgwteb',
+    #     'USER': 'fcwgwteb',
+    #     'PASSWORD': 'uG0Ko_Xom2Y-q3XUS7O4hSOZPy2K92iU',
+    #     'HOST': 'balarama.db.elephantsql.com',
+    #     'PORT': 5432
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fcwgwteb',
-        'USER': 'fcwgwteb',
-        'PASSWORD': 'uG0Ko_Xom2Y-q3XUS7O4hSOZPy2K92iU',
-        'HOST': 'balarama.db.elephantsql.com',
+        'NAME': 'charityapp',
+        'USER': 'rizwan',
+        'PASSWORD': 'charity123',
+        'HOST': 'localhost',
         'PORT': 5432
     }
 }
